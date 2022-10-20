@@ -1,0 +1,19 @@
+{% extends 'common\login.html'%}
+{%block title%}Teacher Login{%endblock%}
+{%block name%}
+<h2>Teacher Login Form</h2>
+{%endblock%}
+{%block image%} <img
+    src="https://www.w3schools.com/howto/img_avatar2.png"
+    alt="Avatar" class="avatar"> {%endblock%}
+{%block submitb%} 
+<!-- <a class="btn" id="button1" href="{% url 'teacher:t_home'%}">login</a>  -->
+<button type="submit">login</button>
+{{error_message}}
+{%endblock%}
+
+
+
+
+
+

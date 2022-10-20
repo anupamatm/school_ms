@@ -1,0 +1,33 @@
+{% extends 'base_teacher.html'%}
+{%block title%}teacher home{%endblock%}
+
+{%block content %}
+<style>
+  .icon{
+    
+    padding:10px ;
+  }
+  #con{
+    display: grid;
+    grid-template-columns: auto auto;
+    padding-top: 200px;
+    padding-left: 300px;
+    padding-bottom: 200px;
+   
+  }
+</style>
+<div id="con" >
+  <div class="icon">
+    <a class="btn btn-outline-light btn-lg" href="{% url 'teacher:add_student'%}" role="button" >ADD STUDENT</a>
+  </div>
+  
+ <div class="icon">
+  <a class="btn btn-outline-light btn-lg" href="{% url 'teacher:tview_student'%}" role="button" >VIEW STUDENT</a>
+ </div>
+ <div class="icon">
+  <a class="btn btn-outline-light btn-lg" href="{% url 'teacher:tc_pwd'%}" role="button" >CHANGE PASSWORD</a>
+ </div>
+  
+</div>
+
+{%endblock%}

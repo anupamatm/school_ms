@@ -1,0 +1,101 @@
+{% extends 'common\base.html'%}
+{%block title%}adimn home{%endblock%}
+{%block content%}
+<style>
+       
+   *[role="form"] {
+       max-width: ;
+       padding: 15px;
+       margin: 0 auto;
+       border-radius: 0.3em;
+       background-color: #f2f2f2;
+   }
+   
+   *[role="form"] h2 { 
+       font-family: 'Open Sans' , sans-serif;
+       font-size: 40px;
+       font-weight: 600;
+       color: #000000;
+       margin-top: 5%;
+       text-align: center;
+       text-transform: uppercase;
+       letter-spacing: 4px;
+   }
+   
+   
+</style>
+
+
+
+<div class="container">
+    <h1 class="well"><b> ADD TEACHERS</b> </h1>
+	<div class="col-lg-12 well">
+	<div class="row">
+				<form method="POST" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="col-sm-12">
+						<div class="row">
+							
+							<div class="col-sm-6 form-group">
+								<label>Teacher  Name</label>
+								<input type="text" placeholder="Enterteacher Name Here.." class="form-control" id="tname" name="t_name">
+							</div>
+						</div>					
+						<div class="form-group">
+							<label>Address</label>
+							<textarea placeholder="Enter Address Here.." rows="3" class="form-control" id="address" name="t_address"></textarea>
+						</div>	
+						<div class="row">
+							<div class="col-sm-4 form-group">
+								<label>Dob</label>
+								<input type="text" placeholder="Enter Dob.." class="form-control" name="t_dob">
+							</div>	
+                            <div class="col-sm-4 form-group">
+								<label>Gender</label>
+								<input type="text" placeholder="Enter Gender." class="form-control" name="t_gender">
+							</div>	
+							<div class="col-sm-4 form-group">
+								<label>photo</label>
+								<input type="file" placeholder="" class="form-control" id="myFile" name="t_photo">                                
+                                
+							</div>	
+								
+						</div>
+						<div class="row">							
+							
+						</div>	
+                        <div class="form-group">
+                            <label>qualification</label>
+                            <input type="text" placeholder="Enter qualification.." class="form-control" name="t_quali">
+                        </div>						
+					<div class="form-group">
+						<label>Phone Number</label>
+						<input type="text" placeholder="Enter Phone Number Here.." class="form-control" name="t_ph_no">
+					</div>		
+					<div class="form-group">
+						<label>Email Address</label>
+						<input type="text" placeholder="Enter Email Address Here.." class="form-control" name="t_email">
+					</div>	
+					<div class="form-group">
+						<label>Experi</label>
+						<input type="text" placeholder="Enter experi.." class="form-control" name="t_exp">
+					</div>	
+					<div class="form-group">
+						<label>password</label>
+						<input type="text" placeholder="Enterpassword." class="form-control" name="t_password">
+					</div>
+					<button type="submit" class="btn btn-lg btn-info">Submit</button>					
+					</div>
+				</form> 
+				</div>
+	</div>
+	</div>
+      
+      
+         
+      
+     
+  
+ 
+
+{%endblock%}

@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-
-from student.models import StudentLogin
+from teacher.models import Student
 
 # Create your views here.
 
@@ -11,8 +10,8 @@ def s_login(request):
         s_pwd = request.POST['pwd']
 
         try:
-            s_login1 = StudentLogin.objects.get(student_uid=s_uid, student_pwd=s_pwd)
-            return redirect("sudent:sview_profile")
+            s_login1 = Student.objects.get(student_email=s_uid, student_password=s_pwd)
+            return redirect("student:sview_profile")
         except:
             msg = "invalid user name and password"
             return render(request, "s_login.html", {"error_msg": msg})

@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from school_admin.models import Teacher
 from teacher.models import Student
 
+#from teacher.models import Student
+
 # Create your views here.
 
 
@@ -12,8 +14,8 @@ def t_login(request):
 
         try:
             #a_login = StudentLogin.objects.get(student_uid=s_uid,student_pwd=s_pwd)
-            t_login = Teacher.objects.get(
-                teacher_email=t_uid, teacher_password=t_pwd)
+            t_login = Teacher.objects.get(teacher_email=t_uid, teacher_password=t_pwd)
+            request.session['teacher_id'] = t_login.id
             return redirect("teacher:t_home")
         except:
             msg = "invalid user name and password"
@@ -23,7 +25,8 @@ def t_login(request):
 
 
 def t_home(request):
-    return render(request, "t_home.html")
+    t_session=Teacher.objects.get(id=request.session['teacher_id'])
+    return render(request, "t_home.html",{'teacher_data':t_session})
 
 
 def tview_profile(request):
@@ -31,7 +34,9 @@ def tview_profile(request):
 
 
 def tview_student(request):
-    return render(request, "tview_student.html")
+    students=Student.objects.filter(teacher=request.session['teacher_id']) #select * from table where 
+
+    return render(request, "tview_student.html",{'student_list':students})
 
 
 def add_student(request):
@@ -56,10 +61,11 @@ def add_student(request):
             student_parrent_name = sparent_name,
             student_password = s_password,
             student_photo = s_photo,
-            student_dob = s_dob)
+            student_dob = s_dob,
+            teacher_id = request.session['teacher_id'])
 
         student_add.save()
-        
+
     return render(request, "add_student.html")
 
 

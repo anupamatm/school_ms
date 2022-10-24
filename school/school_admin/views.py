@@ -50,8 +50,11 @@ def add_teacher(request):
         
     return render(request,"add_teacher.html")
 
+
 def view_teacher(request):
-    return render(request,"view_teacher.html")
+    teachers=Teacher.objects.all()  #select * from table
+    return render(request,"view_teacher.html",{'teacher_list':teachers})
+
 
 def view_student(request):
     return render(request,"view_student.html")

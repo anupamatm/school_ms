@@ -56,7 +56,10 @@
               <a class="nav-link" href="{% url 'teacher:tview_profile'%}">profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'teacher:tc_pwd'%}">changr password</a>
+              <a class="nav-link" href="{% url 'teacher:tc_pwd'%}">change password</a>
+            </li>
+            <li class="nav-item" style="float:right ;">
+              <a class="nav-link" href="{% url 'teacher:tc_pwd'%}">sign in as:{% block sign%}{% endblock%} </a>
             </li>
           </ul>
         </div>

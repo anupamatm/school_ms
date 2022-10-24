@@ -1,7 +1,8 @@
 {% extends 'base_teacher.html'%}
 {%block title%}teacher home{%endblock%}
-
+{% block sign%}{{teacher_data.teacher_name | title}}{% endblock%}
 {%block content %}
+
 <style>
   .icon{
     
@@ -16,6 +17,7 @@
    
   }
 </style>
+<h3>welcome :{{teacher_data.teacher_name | title}}</h3>
 <div id="con" >
   <div class="icon">
     <a class="btn btn-outline-light btn-lg" href="{% url 'teacher:add_student'%}" role="button" >ADD STUDENT</a>

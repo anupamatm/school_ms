@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from teacher.models import Student
+#from teacher.models import Student
 
 # Create your views here.
 
@@ -11,6 +11,7 @@ def s_login(request):
 
         try:
             s_login1 = Student.objects.get(student_email=s_uid, student_password=s_pwd)
+            
             return redirect("student:sview_profile")
         except:
             msg = "invalid user name and password"

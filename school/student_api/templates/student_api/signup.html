@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+</head>
+
+<body>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="">Name :</label><input type="text" id="name"><span id="s_name"></span><br><br>
+        
+        <label for="">email :</label><input type="text" id="email"><span id="s_email"></span><br><br>
+        
+        <label for=""> phone :</label><input type="text" id="phone"><span id="s_phone"></span><br><br>
+
+        <label for="">addres :</label><input type="text" id="address"><span id="s_address"></span><br><br>
+
+        <label for="">gender:</label>
+        <label for="">male
+        </label><input type="radio" name="gender" value="male" id="male">
+        <label for="">female
+        </label><input type="radio" name="gender" value="female" id="female"> <span id="s_gender"></span>
+        <br><br>
+
+        <label for="">usrname :</label><input type="text" id="username"><span id="s_username"></span><br><br>
+        <label for="">password :</label><input type="text" id="password"><span id="s_password"></span><br><br>
+        <button  onclick="return validate()">submit</button>
+
+    </form>
+    <script>
+        function validate() {
+
+            var s_name = document.getElementById("name")
+            var s_email = document.getElementById("email")
+            var s_phone = document.getElementById("phone")
+            var s_address = document.getElementById("address")
+            var s_male = document.getElementById("male")
+            var s_female = document.getElementById("female")
+            var s_username = document.getElementById("username")
+            var s_password = document.getElementById("password")
+            var sp_name = document.getElementById("s_name")
+            var sp_email = document.getElementById("s_email")
+            var sp_phone = document.getElementById("s_phone")
+            var sp_address = document.getElementById("s_address")
+            var sp_username = document.getElementById("s_username")
+            var sp_password = document.getElementById("s_password")
+            var sp_gender = document.getElementById("s_gender")
+            var sname_pattern = /^[a-z A-Z]+$/
+
+            console.log(s_name.value.match(sname_pattern))
+            console.log(s_name.value)
+            
+            if(s_name.value.match(sname_pattern) == null){
+             alert('invalid')   
+            }
+             
+            if(s_email.value == ''){
+                sp_email.innerHTML="please enter your email"
+                sp_email.style.color="red"
+                return false
+            }
+            else
+            {
+                sp_email.innerHTML=""   
+            }
+            if(s_phone.value == ''){
+                sp_phone.innerHTML="please enter your phone"
+                sp_phone.style.color="red"
+                return false
+            }
+            else
+            {
+                sp_phone.innerHTML=""   
+            }
+            if(s_address.value == ''){
+                sp_address.innerHTML="please enter your name"
+                sp_address.style.color="red"
+                return false
+            }
+            else
+            {
+                sp_address.innerHTML=""   
+            }
+            if(s_username.value == ''){
+                sp_username.innerHTML="please enter your name"
+                sp_username.style.color="red"
+                return false
+            }
+            else
+            {
+                sp_username.innerHTML=""   
+            }
+            if(s_password.value == ''){
+                sp_password.innerHTML="please enter your name"
+                sp_password.style.color="red"
+                return false
+            }
+            else
+            {
+                sp_password.innerHTML=""   
+            }
+            if(s_male.checked==false && s_female.checked==false)
+            {
+                sp_gender.innerHTML="select gender"
+                sp_gender.style.color="red"
+                return false
+            }
+            else (ifs_male.checked==true || s_female.checked==true)
+            {
+                sp_gender.innerHTML=""   
+            }
+
+        }
+    </script>
+</body>
+
+</html>

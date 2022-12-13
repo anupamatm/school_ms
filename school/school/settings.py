@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'student',
     'teacher',
     'common',
+    'student_api',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -130,8 +132,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'school_admin/static'),
     os.path.join(BASE_DIR,'student/static'),
@@ -142,3 +146,46 @@ STATICFILES_DIRS=[
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# LOGGING ={
+#     'version': 1,
+#     'disable existing loggers':False,
+#     'handlers':{
+#         'file':{
+#             'level': DEBUG,
+#             'class':'logging.FileHandler',
+#             'filename':BASE_DIR/'logs/debug.log',
+           
+#         },
+
+#         'console':{
+#             'class':'logging.StreamHandler',
+#         },
+        
+#         'infofle':{
+#             'level':'INFO',
+#             'class':'logging.FileHandler',
+#             'filename': BASE_DIR/'logs/info.log',
+#             'formatter': 'simpleRe',
+#         },
+
+#     },
+#     'loggers':{
+#         'django':{
+#             'handlers': ['file','console','infofile'],
+#             'level': DEBUG,
+#             # 'propogate':True,
+#             # 'level': os.getenv('DJANGo_LOG_LEVEL','DEBUG')
+#         },
+#     },
+#     'formatters':{
+#         'simpleRe': {
+#             'formate': '{level} {asctime} {module} {message}',
+#             'style':'{',
+
+            
+
+#         }
+#     }
+
+# }

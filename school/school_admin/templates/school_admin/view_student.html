@@ -1,14 +1,21 @@
 {% extends 'common\base.html'%}
 {%block title%}view student{%endblock%}
 {%block content%}
+<style>
+  th{
+    color: green;
+
+  }
+</style>
 <h1>view student</h1>
 
 <table class="table align-middle mb-0 bg-white">
     <thead class="bg-light">
+      
       <tr>
-        
+        <th>sl no</th>
         <th>Name</th>
-        <th>sid</th>
+        
         <th>Email</th>
         <th>phone</th>
         <th>gender</th>
@@ -16,13 +23,24 @@
         <th>parent name</th>
         <th>class teacher</th>
         <th>photo</th>
-        <th>Actions</th>
+        <!-- <th>Actions</th> -->
 
       </tr>
     </thead>
+    {% for student in student_list %}
     <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{student.student_name}}</td>
+        <td>{{student.student_email}}</td>
+        <td>{{student.student_phone}}</td>
+        <td>{{student.student_gender}}</td>
+        <td>{{student.student_dob}}</td>
+        <td>{{student.student_parrent_name}}</td>
+        <td>{{student.teacher.teacher_name}}</td>
+        <td><img src="{{student.student_photo.url}}" alt="" height="200px" width="200px"></td>
         
     </tr>
+    {% endfor %}
     <tbody>
    
       

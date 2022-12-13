@@ -1,0 +1,31 @@
+{% extends 'base_student.html'%}
+{%block title%}view student{%endblock%}
+{%block content%}
+<h1>student home</h1>
+<style>
+    .icon{
+      
+      padding:10px ;
+    }
+    #con{
+      display: grid;
+      grid-template-columns: auto auto;
+      padding-top: 200px;
+      padding-left: 300px;
+      padding-bottom: 200px;
+     
+    }
+  </style>
+  <div id="con" >
+    <div class="icon">
+      <a class="btn btn-outline-light btn-lg" href="{% url 'student:sview_profile'%}" role="button" >view profile</a>
+    </div>
+    <div class="icon">
+      <a class="btn btn-outline-light btn-lg" href="{% url 'student:s_change_pwd'%}" role="button" >change password</a>
+    </div>
+   
+    
+  </div>
+  
+
+{%endblock%}

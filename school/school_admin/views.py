@@ -1,4 +1,6 @@
 from django.shortcuts import render,redirect
+
+from teacher.models import Student
 from . models import AdminLogin, Teacher
 
 # Create your views here.
@@ -57,7 +59,8 @@ def view_teacher(request):
 
 
 def view_student(request):
-    return render(request,"view_student.html")
+    students=Student.objects.all()
+    return render(request,"view_student.html",{'student_list':students})
 
 def a_profile(request):
     return render(request,"admin_profile.html")

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Data Table</title>
+</head>
+
+<body>
+    <h1>Student Data Table</h1>
+    <table id="student-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>DOB</th>
+                <th>Phone</th>
+                <th>Action</th> <!-- Add a new table header for actions -->
+            </tr>
+
+
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus, odio rerum, excepturi eveniet commodi
+                repudiandae omnis officia molestiae facere eligendi sequi necessitatibus, doloremque quas aliquam eum
+                deserunt earum voluptates in.</p>
+        </thead>
+        <tbody>
+            <!-- Data from the API will be inserted here -->
+        </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // script.js
+
+        $(document).ready(function () {
+            const tbody = $('#student-table tbody');
+
+            // Replace 'https://api.example.com/students' with the actual API endpoint
+            const apiUrl = 'http://127.0.0.1:8000/student_api/load_student';
+
+            // Fetch data from the API
+            $.ajax({
+                url: apiUrl,
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    // Iterate through the data and populate the table
+                    $.each(data, function (index, student) {
+                        const row = `<tr>
+                            <td>${student.name}</td>
+                            <td>${student.email}</td>
+                            <td>${student.gender}</td>
+                            <td>${student.dob}</td>
+                            <td>${student.phone}</td>
+                            <td>
+                                <button class="edit-button" data-student-id="${student.id}">Edit</button>
+                                <button class="delete-button" data-student-id="${student.id}">Delete</button>
+                            </td>
+                        </tr>`;
+                        tbody.append(row);
+                    });
+
+                    // Add event listeners for the edit and delete buttons
+                    $('.edit-button').on('click', function () {
+                        const studentId = $(this).data('student-id');
+                        // Add logic for handling edit action
+                        console.log('Edit button clicked for student ID:', studentId);
+                    });
+
+                    $('.delete-button').on('click', function () {
+                        const studentId = $(this).data('student-id');
+                        delete_btn = $(this)
+                        // Add logic for handling delete action
+                        $.ajax({
+                            url: "http://127.0.0.1:8000/student_api/del_student/" + studentId,
+                            method: 'DELETE',
+                            dataType: 'json',
+                            success: function (data) {
+                                console.log(data); // Log the response from the server
+                                // Optionally, you can remove the row from the table upon successful deletion
+                                delete_btn.closest('tr').remove();
+                            },
+                            error: function (error) {
+                                console.error('AJAX Error:', error);
+                                // Handle any errors that occur during the AJAX request
+                            }
+                        });
+                        console.log('Delete button clicked for student ID:', studentId);
+                    });
+
+                },
+                error: function (error) {
+                    console.error('AJAX Error:', error);
+                    // Handle any errors that occur during the AJAX request
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

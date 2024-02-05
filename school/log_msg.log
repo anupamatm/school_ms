@@ -1,5 +1,9 @@
- 2022-11-11 14:43:10,133  exeption occured
+ 2023-09-11 17:25:45,223  exeption occured
 Traceback (most recent call last):
   File "d:\STUDENT PROJECT\school\student_api\errooo.py", line 9, in <module>
     c=a/b
+      ~^~
 ZeroDivisionError: division by zero
+ 2023-09-11 17:25:45,227  the warning message is displaying
+ 2023-09-11 17:25:45,227  the error message is displaying
+ 2023-09-11 17:25:45,227  the critical message is displaying

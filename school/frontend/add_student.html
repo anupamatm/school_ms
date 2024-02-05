@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details Form</title>
+</head>
+<body>
+    <h1>Student Details Form</h1>
+    <form id="student-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required><br><br>
+
+        <label for="Gender">Gender:</label>
+        male
+        <input type="radio"  name="gender" value="male">
+        female
+        <input type="radio"  name="gender" value="female"><br><br>
+
+        <label for="dob">DOB:</label>
+        <input type="text" id="dob" name="dob" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="text" id="pwd" name="password" required><br><br>
+
+        <label for="phone">Phone:</label>
+        <input type="number" id="phone" name="phone" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // script.js
+
+$(document).ready(function () {
+    const form1 = $('#student-form');
+
+    form1.submit(function (e) {
+        e.preventDefault(); // Prevent the form from submitting in the traditional way
+
+        // Serialize the form data as JSON
+        const formData = form1.serializeArray();
+        const studentData = {};
+        $.each(formData, function (index, field) {
+            studentData[field.name] = field.value;
+        });
+
+        // Send the data to the API using AJAX
+        $.ajax({
+            type: 'POST',
+            url: 'http://127.0.0.1:8000/student_api/add_student',
+            data: JSON.stringify(studentData),
+            contentType: 'application/json',
+            success: function (data) {
+                console.log('API Response:', data);
+                if(data.status==200){
+                    form1[0].reset();
+                    window.location.href = "/frontend/view_student.html";
+                }
+                // Handle the API response here, such as displaying a success message
+            },
+            error: function (error) {
+                console.error('AJAX Error:', error);
+                // Handle any errors that occur during the AJAX request
+            }
+        });
+    });
+});
+
+    </script>
+
+</body>
+</html>

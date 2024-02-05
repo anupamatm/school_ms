@@ -1,4 +1,4 @@
-{% extends 'common\base.html'%}
+{% extends 'common/base.html'%}
 {%block title%}view teacher{%endblock%}
 {%block content%}
 <h1>view teacher</h1>
@@ -23,18 +23,22 @@
     
     <tbody>
       {% for teacher in teacher_list %}
+
       <tr>
         <td>{{forloop.counter}}</td>
         <td>{{teacher.teacher_name | upper }}</td>
         <td>{{teacher.teacher_email }}</td>
-        <td>{{teacher.teacher_phone }}</td>
+        <!-- <td>{{teacher.teacher_phone }}</td>
         <td>{{teacher.gender }}</td>
         <td>{{teacher.teacher_dob }}</td>
-        <td>{{teacher.teacher_address }}</td>
+        <td>{{teacher.teacher_address }}</td> -->
         <td>{{teacher.qualifiaction }}</td>
-        <td>{{teacher.exp }} year{{ teacher.exp | pluralize}}</td>
+        <!-- <td>{{teacher.exp }} year{{ teacher.exp | pluralize}}</td> -->
         <td><img src="{{ teacher.teacher_photo.url }}" alt="hhh" height="100px" width="100px"></td>
+        <!-- <td><img src="{{MEDIA_URL}}/{{teacher.teacher_photo}}" alt="hhh" height="100px" width="100px"></td> -->
+
       </tr>
+     
       {% endfor %}
     </tbody>
   </table>

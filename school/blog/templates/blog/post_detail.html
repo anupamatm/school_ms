@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+<style>
+    .post {
+        margin-bottom: 30px;
+      }
+      
+      .post h2 {
+        color: #333;
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+      
+      .post p {
+        color: #666;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      
+      /* Author styles */
+      .author {
+        margin-top: 20px;
+        color: #999;
+        font-size: 14px;
+      }
+      
+      /* Separator styles */
+      hr {
+        border: none;
+        border-top: 1px solid #ddd;
+        margin: 20px 0;
+      }
+</style>
+</head>
+<body>
+    <div class="post">
+        <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+    
+    <p>Total Likes: {{ post.likes_count }}</p>
+    
+    <form action="{% url 'blog:like_post' post_id=post.id %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Like</button>
+    </form>
+    </div>
+    
+</form>
+</body>
+</html>

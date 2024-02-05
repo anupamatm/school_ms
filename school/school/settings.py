@@ -43,7 +43,11 @@ INSTALLED_APPS = [
     'teacher',
     'common',
     'student_api',
-    'rest_framework'
+    'rest_framework',
+    'google_api',
+    'student_fend',
+    "corsheaders",
+    'blog'
 ]
 
 MIDDLEWARE = [
@@ -54,7 +58,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
+
+CORS_ALLOW_ALL_ORIGINS=True
 
 ROOT_URLCONF = 'school.urls'
 
@@ -81,20 +89,38 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'school.wsgi.application'
 
+AUTH_USER_MODEL = 'blog.User'
+LOGIN_REDIRECT_URL = 'blog:blog_list'
+
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME':'schooldb',
+#         'USER':'postgres',
+#         'PASSWORD':'iTr114718S5RBDGVyg5dL9dRQAh6oAzW',
+#         # 'HOST':'host.docker.internal',
+#         # 'HOST': '172.17.0.2',
+#         # 'HOST': 'dpg-cn0859v109ks73ben9qg-a.oregon-postgres.render.comlocalhost',
+#         'HOST': 'dpg-cn0859v109ks73ben9qg-a.oregon-postgres.render.com',
+
+#         'PORT':'5432',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':'schooldb',
-        'USER':'postgres',
-        'PASSWORD':'root',
-        'HOST':'localhost',
-        'PORT':'5432',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'schooldb_qqrx',  # Name of your PostgreSQL database
+        'USER': 'schooldb_qqrx_user',  # PostgreSQL user
+        'PASSWORD': 'iTr114718S5RBDGVyg5dL9dRQAh6oAzW',  # Password for the PostgreSQL user
+        'HOST': 'dpg-cn0859v109ks73ben9qg-a.oregon-postgres.render.com',  # Hostname of the PostgreSQL database server
+        'PORT': '5432',  # Port number for the PostgreSQL database server
     }
 }
+
 
 
 # Password validation
@@ -146,6 +172,13 @@ STATICFILES_DIRS=[
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'aastroaurora@gmail.com'
+EMAIL_HOST_PASSWORD = 'scwcxkyhwkxtiext'
 
 # LOGGING ={
 #     'version': 1,

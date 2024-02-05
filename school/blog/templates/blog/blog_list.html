@@ -1,0 +1,26 @@
+{% load static %}
+<!-- blog_list.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog_list.css' %}">
+</head>
+<body>
+    <h1 class="page-title">Blog List</h1>
+
+    <div class="post-list">
+        {% for post in posts %}
+        <div class="post">
+            <h2 class="post-title">{{ post.title }}</h2>
+            <p class="post-content">{{ post.content }}</p>
+            <!-- Display other post details as needed -->
+            <a class="post-details" href="{% url 'blog:post_detail' post.id %}">Read More</a>
+        </div>
+        <hr class="post-separator">
+        {% endfor %}
+    </div>
+</body>
+</html>

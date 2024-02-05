@@ -3,6 +3,10 @@ from school_admin.models import Teacher
 from teacher.models import Student
 from . decorators import auth_teacher
 from django.http import JsonResponse
+import reportlab    
+from reportlab.pdfgen import canvas
+import os,sys
+from django.views.decorators.cache import cache_control
 
 #from teacher.models import Student
 
@@ -24,6 +28,7 @@ def t_login(request):
     return render(request, "t_login.html")
 
 @auth_teacher
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def t_home(request):    
     t_session=Teacher.objects.get(id=request.session['teacher_id'])
     return render(request, "t_home.html",{'teacher_data':t_session})
@@ -31,21 +36,25 @@ def t_home(request):
        
 
 @auth_teacher
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def tview_profile(request):
     return render(request, "tview_profile.html")
 
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def t_logout(request):
     del request.session['teacher_id']
     request.session.flush()
     return redirect("common:home")
 
 @auth_teacher
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def tview_student(request):
     students=Student.objects.filter(teacher=request.session['teacher_id']) #select * from table where 
 
     return render(request, "tview_student.html",{'student_list':students})
 
 @auth_teacher
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def add_student(request):
     msg=""
     if request.method == 'POST':
@@ -81,6 +90,7 @@ def add_student(request):
     return render(request, "add_student.html",{'status':msg})
 
 @auth_teacher
+@cache_control(no_cache=True, must_revalidate=True,no_store=True)
 def tchange_pwd(request):
     msg=""
     if request.method=='POST':
@@ -113,4 +123,18 @@ def email_exist(request):
     e_exists = Student.objects.filter(student_email = email).exists()
     return JsonResponse({'status':e_exists})
 
-   
+def pdf(request):
+    p = canvas.Canvas('2.pdf')               # Init a PDF object
+    p.drawString(200, 200, "Hello world.")   # Draw a simple String  
+    p.showPage()                             # Create the PDF
+    p.save() 
+    os.startfile('2.pdf', 'open')
+    
+
+def pdfhtml(request):
+    p = canvas.Canvas('2.pdf')               # Init a PDF object
+    p.drawString(200, 200, "Hello world.,nzncx mcxnv m.cnbmn mc,vc")   # Draw a simple String  
+    p.showPage()                             # Create the PDF
+    p.save() 
+    os.startfile('2.pdf', 'open')
+    return render(request,'teacher/pdf.html')

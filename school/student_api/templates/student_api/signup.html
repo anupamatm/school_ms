@@ -11,7 +11,7 @@
 <body>
 
     <form action="" method="POST">
-        {% csrf_token %}
+        <!-- {% csrf_token %} -->
         <label for="">Name :</label><input type="text" id="name"><span id="s_name"></span><br><br>
         
         <label for="">email :</label><input type="text" id="email"><span id="s_email"></span><br><br>
@@ -51,6 +51,7 @@
             var sp_password = document.getElementById("s_password")
             var sp_gender = document.getElementById("s_gender")
             var sname_pattern = /^[a-z A-Z]+$/
+            var email_pattern=/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}\b/
 
             console.log(s_name.value.match(sname_pattern))
             console.log(s_name.value)
@@ -59,7 +60,7 @@
              alert('invalid')   
             }
              
-            if(s_email.value == ''){
+            if(s_email.value.match(email_pattern)==null){
                 sp_email.innerHTML="please enter your email"
                 sp_email.style.color="red"
                 return false
@@ -95,6 +96,19 @@
             {
                 sp_username.innerHTML=""   
             }
+
+            if(s_male.checked==false && s_female.checked==false)
+            {
+                sp_gender.innerHTML="select gender"
+                sp_gender.style.color="red"
+                return false
+            }
+            else
+            {
+                sp_gender.innerHTML=""   
+            }
+
+
             if(s_password.value == ''){
                 sp_password.innerHTML="please enter your name"
                 sp_password.style.color="red"
@@ -104,17 +118,7 @@
             {
                 sp_password.innerHTML=""   
             }
-            if(s_male.checked==false && s_female.checked==false)
-            {
-                sp_gender.innerHTML="select gender"
-                sp_gender.style.color="red"
-                return false
-            }
-            else (ifs_male.checked==true || s_female.checked==true)
-            {
-                sp_gender.innerHTML=""   
-            }
-
+           
         }
     </script>
 </body>

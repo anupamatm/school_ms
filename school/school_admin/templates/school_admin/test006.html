@@ -1,0 +1,168 @@
+ Step 1: Update `views.py` in the `teacher` app
+
+```python
+# teacher/views.py
+
+from django.shortcuts import render, redirect
+from .models import Student
+
+def view_students(request):
+    # Retrieve all students from the database
+    students = Student.objects.all()
+    
+    return render(request, 'student/view_students.html', {'students': students})
+
+def edit_student(request, student_id):
+    # Retrieve the student based on the provided ID
+    student = Student.objects.get(id=student_id)
+
+    if request.method == 'POST':
+        # Update student details based on the form submission
+        student.name = request.POST['name']
+        student.age = request.POST['age']
+        student.grade = request.POST['grade']
+        student.save()
+        return redirect('view_students')  # Redirect to the view_students page after editing a student
+
+    return render(request, 'student/edit_student.html', {'student': student})
+
+def delete_student(request, student_id):
+    # Retrieve the student based on the provided ID
+    student = Student.objects.get(id=student_id)
+
+    if request.method == 'POST':
+        # Delete the student from the database
+        student.delete()
+        return redirect('view_students')  # Redirect to the view_students page after deleting a student
+
+    return render(request, 'student/delete_student.html', {'student': student})
+```
+
+### Step 2: Create View Students, Edit Student, and Delete Student Templates
+
+#### `view_students.html`
+
+```html
+<!-- student/templates/student/view_students.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2>View Students</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Grade</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in students %}
+          <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.age }}</td>
+            <td>{{ student.grade }}</td>
+            <td>
+              <!-- Edit button links to the edit_student view -->
+              <a href="{% url 'edit_student' student.id %}" class="btn btn-primary">Edit</a>
+              <!-- Delete button links to the delete_student view -->
+              <a href="{% url 'delete_student' student.id %}" class="btn btn-danger">Delete</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
+```
+
+#### `edit_student.html`
+
+```html
+<!-- student/templates/student/edit_student.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2>Edit Student</h2>
+    <form method="post" action="">
+      {% csrf_token %}
+      <!-- Form fields for editing a student -->
+      <label for="name">Name:</label>
+      <input type="text" name="name" value="{{ student.name }}" required>
+      <label for="age">Age:</label>
+      <input type="number" name="age" value="{{ student.age }}" required>
+      <label for="grade">Grade:</label>
+      <input type="text" name="grade" value="{{ student.grade }}" required>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+  </div>
+{% endblock %}
+```
+
+#### `delete_student.html`
+
+```html
+<!-- student/templates/student/delete_student.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2>Delete Student</h2>
+    <p>Are you sure you want to delete the student "{{ student.name }}"?</p>
+    <form method="post" action="">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Delete</button>
+      <a href="{% url 'view_students' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+{% endblock %}
+```
+
+### Step 3: Update URLs
+
+```python
+# student/urls.py
+
+from django.urls import path
+from .views import view_students, edit_student, delete_student
+
+urlpatterns = [
+    path('view/', view_students, name='view_students'),
+    path('edit/<int:student_id>/', edit_student, name='edit_student'),
+    path('delete/<int:student_id>/', delete_student, name='delete_student'),
+    # Add other URL patterns as needed
+]
+```
+
+### Step 4: Update Main Project URLs
+
+```python
+# school_project/urls.py
+
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('student/', include('student.urls')),  # Include student app URLs
+    # Add other URL patterns as needed
+]
+```
+
+### Step 5: Test Your Application
+
+Run the development server:
+
+```bash
+python manage.py runserver
+```
+
+Open your web browser and go to `http://127.0.0.1:8000/student/view/` to view the students as a table with edit and delete buttons.
+
+This guide provides a detailed step-by-step implementation of viewing student details as a table with edit and delete buttons in a Django application. Adjust the code based on your project requirements, and feel free to ask if you have any questions or need further clarification!

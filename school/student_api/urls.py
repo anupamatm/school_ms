@@ -8,6 +8,7 @@ urlpatterns = [
     path('update_student/<int:s_id>',views.update_student,name='update_student'),
     path('index',views.index,name='index'),
     path('number',views.number,name='number'),
-    path('signup',views.signup,name='signup')
+    path('signup',views.signup,name='signup'),
+    path('home',views.home,name='home')
     
-][h[;]]
+]

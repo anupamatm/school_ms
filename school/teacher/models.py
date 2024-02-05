@@ -14,3 +14,6 @@ class Student(models.Model):
     #student_photo = models.ImageField(upload_to='student/')
     student_address = models.CharField(max_length=60)
     student_parrent_name = models.CharField(max_length=60)
+
+    def __str__(self):
+        return f"{self.id}: {self.teacher} {self.student_name},{self.student_address} "

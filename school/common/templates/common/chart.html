@@ -1,0 +1,69 @@
+<!-- your_template.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vote Results</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="chartsContainer">
+        {% for position_data in chart_data %}
+            <div class="chart-container"  style="width: 500px;">
+                <h2>{{ position_data.position }}</h2>
+                <canvas class="voteChart" width="10px" height=""></canvas>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            var chartData = {{ chart_data|safe }};
+            
+            $(".voteChart").each(function(index, chartCanvas) {
+                var positionData = chartData[index];
+                var candidates = positionData.candidates;
+                
+                var ctx = chartCanvas.getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: candidates.map(candidate => candidate.name),
+                        datasets: [{
+                            label: 'Votes',
+                            data: candidates.map(candidate => candidate.votes),
+                            backgroundColor: getRandomColorArray(candidates.length)
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+
+            function getRandomColorArray(count) {
+                var colors = [];
+                for (var i = 0; i < count; i++) {
+                    //colors.push(getRandomColor());
+                    colors.push("green");
+                }
+                return colors;
+            }
+
+            function getRandomColor() {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+        });
+    </script>
+</body>
+</html>

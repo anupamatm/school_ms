@@ -54,7 +54,9 @@ def add_teacher(request):
 
 
 def view_teacher(request):
-    teachers=Teacher.objects.all()  #select * from table
+    # teachers=Teacher.objects.all()  #select * from table
+    teachers=Teacher.objects.values('teacher_name','teacher_email','qualifiaction','teacher_photo')  #select * from table
+
     return render(request,"view_teacher.html",{'teacher_list':teachers})
 
 

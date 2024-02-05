@@ -22,7 +22,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('common.urls')),
     path('school_admin/',include('school_admin.urls')),
-    path('student',include('student.urls')),
-    path('teacher',include('teacher.urls')),
+    path('student/',include('student.urls')),
+    path('teacher/',include('teacher.urls')),
     path('student_api/',include('student_api.urls')),
+    path('google_api/',include('google_api.urls')),
+    path('student_fend/',include('student_fend.urls')),
+    (path('blog/',include('blog.urls')))
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

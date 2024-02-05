@@ -28,7 +28,7 @@ DEBUG = True
 
 # settings.py
 
-ALLOWED_HOSTS = ['your_domain.com', 'school-ms.onrender.com', 'other_allowed_domain.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'school-ms.onrender.com', 'other_allowed_domain.com']
 
 
 

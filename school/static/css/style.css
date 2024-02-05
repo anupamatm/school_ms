@@ -1,0 +1,40 @@
+/* styles.css */
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  /* Header styles */
+  h1 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  /* Post styles */
+  .post {
+    margin-bottom: 30px;
+  }
+  
+  .post h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .post p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* Separator styles */
+  hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+  }
+  

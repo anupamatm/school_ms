@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-8lqh@p%@zq9g^74+z9fin+ku1tld+r*1wq@o-pufw&=edym^ns
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['school-ms.onrender.com']
+# settings.py
+
+ALLOWED_HOSTS = ['your_domain.com', 'school-ms.onrender.com', 'other_allowed_domain.com']
+
 
 
 # Application definition
@@ -168,6 +171,8 @@ STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'teacher/static'),
     os.path.join(BASE_DIR,'common/static'),
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
